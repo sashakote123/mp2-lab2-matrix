@@ -157,7 +157,7 @@ TVector<ValType> TVector<ValType>::operator+(const TVector<ValType>& v) {
         throw exception();
     TVector<ValType> sum(*this);
     for (size_t i = 0; i < Size; i++)
-        sum.pVector[i] += v.pVector[i];
+        sum.pVector[i] = sum.pVector[i] + v.pVector[i];
     return sum;
 } /*-------------------------------------------------------------------------*/
 
@@ -167,12 +167,14 @@ TVector<ValType> TVector<ValType>::operator-(const TVector<ValType>& v) {
         throw exception();
     TVector<ValType> dif(*this);
     for (size_t i = 0; i < Size; i++)
-        dif.pVector[i] -= v.pVector[i];
+        dif.pVector[i] = dif.pVector[i] - v.pVector[i];
     return dif;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // скалярное произведение
 ValType TVector<ValType>::operator*(const TVector<ValType>& v) {
+    if ((Size != v.Size) || (StartIndex != v.StartIndex))
+        throw exception();
     int sum = 0;
     for (size_t i = 0; i < Size; i++)
         sum += pVector[i] * v.pVector[i];
