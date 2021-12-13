@@ -8,24 +8,39 @@
 #include <iostream>
 #include "utmatrix.h"
 //---------------------------------------------------------------------------
-
+using namespace std;
 void main()
 {
-  TMatrix<int> a(5), b(5), c(5);
-  int i, j;
+	setlocale(LC_ALL, "Russian");
 
-  setlocale(LC_ALL, "Russian");
-  cout << "Тестирование программ поддержки представления треугольных матриц"
-    << endl;
-  for (i = 0; i < 5; i++)
-    for (j = i; j < 5; j++ )
-    {
-      a[i][j] =  i * 10 + j;
-      b[i][j] = (i * 10 + j) * 100;
-    }
-  c = a + b;
-  cout << "Matrix a = " << endl << a << endl;
-  cout << "Matrix b = " << endl << b << endl;
-  cout << "Matrix c = a + b" << endl << c << endl;
+	int n1 = 0, n2 = 0;
+	cout << "Введите размер матрицы и её значения:\n";
+	cout << "Размер матрицы А:\n";
+	cin >> n1;
+	cout << "Размер матрицы B:\n";
+	cin >> n2;
+	TMatrix<int> A(n1), B(n2);
+
+	cout << "Матрица А:\n";
+	cin >> A;
+	cout << "Матрица B:\n";
+	cin >> B;
+	cout << "Матрица А:\n" << A;
+	cout << "Матрица B:\n" << B;
+	char operatorr;
+	cout << "Выберите действие:\n";
+	cin >> operatorr;
+	switch (operatorr) {
+	case '+':
+		cout << A + B;
+		break;
+	case '-':
+		cout << A - B;
+		break;
+	default:
+		cout << "Неверное действие...\n";
+		break;
+	}
+
 }
 //---------------------------------------------------------------------------
